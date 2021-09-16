@@ -13,11 +13,13 @@ public class Calculator {
 	
 	// Declare
 	static Scanner input; 
+	static double result;
 	
 	public static void main(String [] args) {
 		
 		// Initialize
 		input = new Scanner(System.in); 
+		result = 0L;
 		
 		int select = showMenu();
 		System.out.println("Seçilen :" + select);
@@ -42,5 +44,54 @@ private static int showMenu() {
 		
 		return selectedInt;
 	}
+
+/**
+ * Bu method kullanıcıdan sayı girişi alır,hesaplar ve sonucu döndürür. Aldığı parametre sayesinde yapılması gereken işleme ait 
+ * methodu çağırır.
+ * 
+ * Method kendi içerisinde bir döngü halindedir. Kullanıcı artık istemeyene kadar sayı girişi yapar.
+ * Bu methoda verilen parametre ile işlem methodları hesaplama yapar ve sonucları buraya geri döndürür.
+ * Dönen sonuç artık localResult değişkenine eşit olur. Kullanıcı isterse bu değişkeni global kısımda tanımlanan
+ * result değerine eşitler ardından başka bir işlem ile devam edebilir.
+ * */
+
+private static double request(int action) {
+	double localResult = 0L;
+	
+	System.out.println("Sayı giriniz :");
+	int num = input.nextInt();
+	
+	
+	switch(action) {
+	case 0:
+		// Çıkış
+		break;
+	case 1:
+		// toplama
+		break;
+	case 2:
+		// çıkarma
+		break;
+	case 3:
+		// çarpma
+		break;
+	case 4:
+		// bölme
+		break;
+	case 5:
+		// mod
+		break;
+	case 6:
+		// Hafızaya al
+		break;
+	case 7:
+		// Hafızadakini yazdır
+		break;
+	}
+	
+	return localResult;
+}
+
+
 	
 }
