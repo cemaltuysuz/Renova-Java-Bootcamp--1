@@ -82,7 +82,8 @@ private static int showMenu() {
 		String [] actions = {"Toplama","Çıkarma","Çarpma","Bölme","Mod","Hafızaya Al","Hafızadakini yazdır ve temizle","Çıkış"};
 		
 		for(int i=0;i<actions.length;i++) {
-			System.out.println("["+(i+1)+"]"+" "+actions[i]);
+			if(i == 7) System.out.println("["+(0)+"]"+" "+actions[i]);
+			else System.out.println("["+(i+1)+"]"+" "+actions[i]);
 		}
 		int selected = input.nextInt();
 		
