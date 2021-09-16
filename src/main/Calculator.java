@@ -9,24 +9,67 @@ import java.util.Scanner;
  * */
 
 
+/**
+ * 
+ * -> Menüyü göstermek için seçilen işlemi geri döndüren bir method. | showMenu() ,
+ * -> Seçilen işlemi işlemesi ve kullanıcıdan girdi alması için bir method. | request() 
+ * 
+ * Çıkış yapılmak istenilene kadar kullanıcıya menü gösterdikten sonra seçilen maddeye göre işlem yapılması bir 
+ * döngü halindedir. 
+ *  
+ * Kullanıcı işlem seçtikten sonra request methodu içerisinde farklı bir döngü daha vardır. Bu döngü ile seçilen işleme
+ * göre sürekli sayı alınır ve işlem devam ettirilir ta ki kullanıcı girdi kısmından ayrılmak isteyene kadar.
+ * */
+
+
 public class Calculator {
 	
-	// Declare
-	static Scanner input; 
-	static double result;
+
+static Scanner input; // Declare Scanner
+static double result; // Kayıt
 	
-	public static void main(String [] args) {
+public static void main(String [] args) {
 		
-		// Initialize
-		input = new Scanner(System.in); 
-		result = 0L;
-		boolean loopStatus = true;
+	input = new Scanner(System.in); // Initialize Scanner
+	result = 0L; 
+	
+	/**
+	 * Kullanıcı her işlem yaptığı zaman kayıt ederek devam etmek isterse geçici ve her yeni işlemde o işlemin
+	 * Sonucunu tutan bir değişken oluşturdum.
+	 * */
+	double temporaryResult = 0L; 
+	
+	boolean loopStatus = true; // döngü kontrolü
 		
 		while(loopStatus) {
 			int select = showMenu();
-			request(select);
+			
+			switch(select) {
+			case 0:
+				loopStatus = false;
+				break;
+				
+			case 7: 
+				System.out.println("Sonuc :" + String.valueOf(result));
+				result = 0L;
+				break;
+				// işlem hafızaya alındı.
+			case 6:
+				result = temporaryResult;
+				break;
+				
+				// Kullanıcı çıkış yapmak istemediyse (0) yada hafızayı temizlemek istemediyse bir işlem seçmiştir.
+				// Bu durumda seçimi request methoduna gönderiyoruz.
+				default :
+					double newResult = request(select);
+					temporaryResult = newResult;
+					break;
+			}
+				
 		}
+		
 	}
+	
 	
 	/**
 	 * Bu methodum ile kullanıcıya işlemlerin olduğu bir menü gösteriyor 
@@ -61,26 +104,18 @@ private static double request(int action) {
 	double localResult = result; // Tek bir işlem için alınan her sayıda elde edilen sonucu sakladığım değişken.
 	boolean loopStatus = true; // Döngünün devamını kontrol ettiğin değişken.
 	
+	
 	while(loopStatus) {
 		
-		// Kullanıcıdan sayı istiyorum
-		
+		// Kullanıcıdan sayı girişi aldığım kısım.
 		System.out.println("Sayı giriniz : [Sayı girişinden ayrılmak için 0]");
 		double num = input.nextDouble();
 		
-		if(num == 0) { 
-			// Kullanıcı sayı girisini bitiridi ise yapmak istediği işlemi seçtirmek için tekrardan menüyü gösteriyorum
-			// Böylelikle yapmış olduğu işlemlere ait sonucu global tarafa yazdırabilir ve yeni bir işlemden devam edebilir.
-			// veya sonucunu yazdırır
-			loopStatus = false;
-			int reSelect = showMenu();
-			if(reSelect == 6) {
-				result = localResult;
-			}else if(reSelect == 7) {
-				System.out.println("Sonuc :" + String.valueOf(localResult));
-			}
-			
-			
+		// Kullanıcı girdiği sayıda, sayı girişinden çıkmak veya bu işlemdeki sonucu hafızaya yazdırmak isteyebilir.
+		
+		if(num == 0) {
+			loopStatus = false; // Sayı girişinden çıkmak isterse döngü kapanır.
+			break;
 		}
 		
 		switch(action) {
@@ -102,8 +137,17 @@ private static double request(int action) {
 		}
 		
 	}	
+	
 	return localResult;
 }
+
+/**
+ * 
+ * Kullanıcı toplama işlemi haricinde başka bir işlem seçip sayı girerse girdiği ilk sayı herhangi bir işleme
+ * girmeden direkt olarak döndürülür ve localResult'a eşit olmuş olur. Bunun sebebi ise toplama haricinde yapılmak 
+ * istenen işlemlerde girilen ilk sayı işleme 0 ile beraber giriyor olması.
+ * 
+ * */
 
 	//Toplama işlemi
 
