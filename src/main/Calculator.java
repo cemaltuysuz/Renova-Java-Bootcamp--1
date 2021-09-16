@@ -57,40 +57,78 @@ private static int showMenu() {
 
 private static double request(int action) {
 	double localResult = 0L;
+	boolean loopStatus = true;
 	
-	System.out.println("Sayı giriniz :");
-	int num = input.nextInt();
-	
-	
-	switch(action) {
-	case 0:
-		// Çıkış
-		break;
-	case 1:
-		// toplama
-		break;
-	case 2:
-		// çıkarma
-		break;
-	case 3:
-		// çarpma
-		break;
-	case 4:
-		// bölme
-		break;
-	case 5:
-		// mod
-		break;
-	case 6:
-		// Hafızaya al
-		break;
-	case 7:
-		// Hafızadakini yazdır
-		break;
+	while(loopStatus) {
+		
+		System.out.println("Sayı giriniz :");
+		double num = input.nextDouble();
+		
+		switch(action) {
+		case 0: // Çıkış
+			
+			break;
+		case 1: 
+			sum(localResult,num);  // toplama
+			break;
+		case 2:
+			sub(localResult,num);  // çıkarma
+			break;
+		case 3:
+			multiplication(localResult,num); // çarpma
+			break;
+		case 4:
+			divide(localResult,num); // bölme
+			break;
+		case 5:
+			mod(localResult,num); // mod
+			break;
+		case 6:
+			// Hafızaya alma
+			break;
+		case 7:
+			// Hafızadakini yazdır ve temizle
+			break;
+		}
+		
 	}
+	
 	
 	return localResult;
 }
+
+	//Toplama işlemi
+
+	public static double sum (double localResult,double num) {
+		double result = localResult + num;
+		return result;
+	}
+	// Çıkarma işlemi
+	
+	public static double sub (double localResult,double num) {
+		double result = localResult - num;
+		return result;
+	}
+	// Bölme işlemi
+	
+	public static double divide (double localResult,double num) {
+		double result = localResult / num;
+		return result;
+	}
+	// Çarpma işlemi
+	
+	public static double multiplication (double localResult,double num) {
+		double result = localResult * num;
+		return result;
+	}
+	// Mod Alma işlemi
+	
+	public static double mod (double localResult,double num) {
+		double result = localResult % num;
+		return result;
+	}
+
+
 
 
 	
